@@ -9,7 +9,7 @@ namespace Lesha66;
 public class UpAndNavigateTest
 {
     private readonly Utils _utils = new();
-    
+
     [Benchmark]
     public async Task BrowserUpAndNavigate_Selenium_NonHeadless_Maximized()
     {
@@ -21,13 +21,13 @@ public class UpAndNavigateTest
     [Benchmark]
     public async Task BrowserUpAndNavigate_Playwright_NonHeadless_Maximized()
     {
-
-        var context = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
+        var (browser, context) = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
         var page = await context.NewPageAsync();
         await page.GotoAsync("https://www.a1qa.com/");
-        await page.CloseAsync();
+        await context.CloseAsync();
+        await browser.CloseAsync();
     }
-    
+
     [Benchmark]
     public async Task BrowserUpAndNavigate_Selenium_NonHeadless_NonMaximized()
     {

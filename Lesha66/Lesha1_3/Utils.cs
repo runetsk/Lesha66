@@ -28,7 +28,7 @@ public class Utils
         return browser;
     }
 
-    public async Task<IBrowserContext> GetBrowserContextPlaywrightMaximizedAsync()
+    public async Task<(IBrowser browser, IBrowserContext context)> GetBrowserContextPlaywrightMaximizedAsync()
     {
         var launchOptions = new BrowserTypeLaunchOptions
         {
@@ -41,6 +41,6 @@ public class Utils
         {
             ViewportSize = ViewportSize.NoViewport
         });
-        return context;
+        return (browser, context);
     }
 }

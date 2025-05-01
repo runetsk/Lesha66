@@ -37,7 +37,7 @@ public class FillFormTest
     [Benchmark]
     public async Task FillForm_Playwright_XPath_NonHeadless_Maximized()
     {
-        var context = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
+        var (browser, context) = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
         try
         {
             var page = await context.NewPageAsync();
@@ -55,13 +55,14 @@ public class FillFormTest
         finally
         {
             await context.CloseAsync();
+            await browser.CloseAsync();
         }
     }
 
     [Benchmark]
     public async Task FillForm_Playwright_NonXpath_NonHeadless()
     {
-        var context = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
+        var (browser, context) = await _utils.GetBrowserContextPlaywrightMaximizedAsync();
         try
         {
             var page = await context.NewPageAsync();
@@ -79,6 +80,7 @@ public class FillFormTest
         finally
         {
             await context.CloseAsync();
+            await browser.CloseAsync();
         }
     }
 }
