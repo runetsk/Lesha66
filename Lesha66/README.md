@@ -1,5 +1,4 @@
 ﻿# Tiny benchmark to compare Selenium and Playwright
-## Big thanks to Alexey Ermolinski
 
 ## Browser Up And Navigate Benchmarks
 
@@ -41,11 +40,24 @@ IterationCount=20  LaunchCount=2  RunStrategy=ColdStart
 | FillForm_Playwright_NonXpath_NonHeadless        | 8.236 s | 0.6870 s | 1.2211 s | 5.585 s | 11.85 s | 7.882 s |
 
 ```
-> **Author’s notes:**  
-Time difference between Selenium and Playwright ~ 1 second (12%)
-The observed differences are too small to claim a meaningful performance advantage for Playwright over Selenium. In real‑world end‑to‑end tests that spend most of their time waiting for backend calls and business‑logic processing, that micro‑difference is lost in the noise. You’ll still be waiting hundreds of milliseconds or several seconds on the server side.
+## Parallel execution benchmarks
 
-> According to the results, XPath performs on par with `getByRole` and CSS selectors in Playwright. However, in practice CSS selectors and `getByRole` often produce more verbose, less intuitive code, forcing you to choose different locator strategies instead of applying a single consistent approach. This is the third time I've used playwright Non-Xpath locators so I’d love to see a PR from anyone more skilled than me.
+IterationCount=10  LaunchCount=1  RunStrategy=ColdStart
+
+| Method                                                   | Mean    | Error    | StdDev  | Min     | Max     | Median  |
+|--------------------------------------------------------- |--------:|---------:|--------:|--------:|--------:|--------:|
+| FillForm_Selenium_Xpath_NonHeadless_Maximized_Parallel   | 25.09 s |  6.204 s | 4.104 s | 18.12 s | 30.76 s | 25.31 s |
+| FillForm_Playwright_XPath_NonHeadless_Maximized_Parallel | 27.24 s | 10.550 s | 6.978 s | 16.16 s | 39.82 s | 26.40 s |
+
+```
+
+> **Author's notes:**  
+Time difference between Selenium and Playwright ~ 1 second (12%)
+The observed differences are too small to claim a meaningful performance advantage for Playwright over Selenium. In real‑world end‑to‑end tests that spend most of their time waiting for backend calls and business‑logic processing, that micro‑difference is lost in the noise. You'll still be waiting hundreds of milliseconds or several seconds on the server side.
+
+> According to the results, XPath performs on par with `getByRole` and CSS selectors in Playwright. However, in practice CSS selectors and `getByRole` often produce more verbose, less intuitive code, forcing you to choose different locator strategies instead of applying a single consistent approach. This is the third time I've used playwright Non-Xpath locators so I'd love to see a PR from anyone more skilled than me.
+
+> In parallel execution tests, Selenium performed slightly better than Playwright with a ~2 second (8%) advantage, though with high variability between runs. This suggests that Selenium might have a slight edge in parallel scenarios, but more testing is needed for conclusive results.
 
 ### PRs to fix existing tests are always welcome as well as additional tests that will prove your point.
 ### Please make sure to run the benchmarks before and after your changes to ensure that performance is not degraded.
@@ -53,7 +65,7 @@ The observed differences are too small to claim a meaningful performance advanta
 
 ### TODO
 
-- [ ] Add multi threading benchmarks for comparison
+- [x] Add multi threading benchmarks for comparison
 - [ ] Add headless browser benchmarks for comparison
 - [ ] Test with additional browsers (Firefox, Safari, Edge)
 - [ ] Create benchmarks for more complex interactions (drag & drop, scrolling, attachements)
