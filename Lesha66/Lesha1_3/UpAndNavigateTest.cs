@@ -3,7 +3,7 @@ using BenchmarkDotNet.Engines;
 
 namespace Lesha66;
 
-[SimpleJob(RunStrategy.ColdStart, launchCount: 2, iterationCount: 10)]
+[SimpleJob(RunStrategy.ColdStart, launchCount: 2, iterationCount: 5)]
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 [MarkdownExporterAttribute.GitHub]
 public class UpAndNavigateTest
