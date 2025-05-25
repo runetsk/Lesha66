@@ -6,6 +6,8 @@ namespace Lesha66;
 
 public class FillFormTest : BaseTest
 {
+    private string BaseUrl { get; set; } = "https://www.a1qa.com/";
+
     public async Task<string> FillForm_Selenium_Xpath(ChromeDriver driver)
     {
         try
