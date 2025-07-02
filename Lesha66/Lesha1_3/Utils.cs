@@ -9,7 +9,9 @@ public class Utils
     {
         var options = new ChromeOptions();
         options.AddArgument("--start-maximized");
-        return new ChromeDriver(options);
+        var driver = new ChromeDriver(options);
+        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+        return driver;
     }
     
     public ChromeDriver GetDriverSelenium()

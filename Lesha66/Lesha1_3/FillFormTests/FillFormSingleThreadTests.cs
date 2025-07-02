@@ -22,7 +22,7 @@ public class FillFormSingleThreadTests : FillFormTest
     }
     
     [Benchmark]
-    public async Task FillForm_Playwright_NonXpath_NonHeadless()
+    public async Task FillForm_Playwright_NonXpath_NonHeadless_Maximized()
     {
         var (browser, context) = await Utils.GetBrowserContextPlaywrightMaximizedAsync();
         await FillForm_Playwright_NonXpath(browser, context);
